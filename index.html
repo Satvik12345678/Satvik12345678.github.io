@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nani — Telugu Cinema's Natural Star</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8d08a;
+      --dark: #0d0d0d;
+      --dark-2: #161616;
+      --dark-3: #1f1f1f;
+      --dark-4: #2a2a2a;
+      --text: #e8e0d0;
+      --text-muted: #8a8070;
+      --crimson: #8b1a2a;
+      --crimson-light: #c0394d;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 40%, #2a1a0a 0%, var(--dark) 70%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1100px;
+      width: 90%;
+      padding: 80px 0;
+    }
+
+    .hero-text { animation: fadeSlideUp 1.2s ease forwards; }
+
+    .hero-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(5rem, 10vw, 9rem);
+      font-weight: 300;
+      line-height: 0.9;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-subtitle {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 28px;
+    }
+
+    .hero-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 32px 0;
+    }
+
+    .hero-since {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      animation: fadeSlideRight 1.4s ease forwards;
+    }
+
+    .hero-image-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, var(--gold) 0%, transparent 60%);
+      border-radius: 2px;
+      z-index: 0;
+    }
+
+    .hero-image-wrap img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-height: 580px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      filter: grayscale(20%) contrast(1.05);
+      transition: filter 0.5s ease;
+    }
+
+    .hero-image-wrap:hover img { filter: grayscale(0%) contrast(1); }
+
+    /* ── NAV BAR ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── BIO SECTION ── */
+    .bio-section {
+      max-width: 860px;
+      margin: 100px auto;
+      padding: 0 5%;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--dark-4);
+    }
+
+    .bio-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      line-height: 1.9;
+      color: #c8bfb0;
+      font-weight: 300;
+    }
+
+    /* ── FILMOGRAPHY WRAPPER ── */
+    .filmography {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 5% 120px;
+    }
+
+    .filmo-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .filmo-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: var(--text);
+    }
+
+    .filmo-header h1 span { color: var(--gold); font-style: italic; }
+
+    /* ── CATEGORY HEADINGS ── */
+    .category-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--text);
+      margin: 70px 0 8px;
+      letter-spacing: 0.05em;
+    }
+
+    .subcategory-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 50px 0 32px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--dark-4);
+    }
+
+    /* ── FILM GRID ── */
+    .film-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+      gap: 28px;
+    }
+
+    /* ── FILM CARD ── */
+    .film-card {
+      position: relative;
+      cursor: pointer;
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--dark-3);
+      transition: transform 0.4s cubic-bezier(.25,.8,.25,1), box-shadow 0.4s;
+      animation: fadeSlideUp 0.6s ease both;
+    }
+
+    .film-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.7), 0 0 0 1px var(--gold);
+    }
+
+    .film-card a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .film-poster {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(15%);
+      transition: filter 0.4s, transform 0.4s;
+    }
+
+    .film-card:hover .film-poster {
+      filter: grayscale(0%);
+      transform: scale(1.04);
+    }
+
+    .film-info {
+      padding: 14px 14px 16px;
+      background: var(--dark-3);
+    }
+
+    .film-number {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .film-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.3;
+      transition: color 0.3s;
+    }
+
+    .film-card:hover .film-title { color: var(--gold-light); }
+
+    /* ── OVERLAY PLAY ── */
+    .film-card .play-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      background: rgba(201,168,76,0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .film-card:hover .play-badge { opacity: 1; }
+
+    .play-badge svg { width: 12px; fill: #000; margin-left: 2px; }
+
+    /* No-link card (no href) just doesn't show badge */
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--dark-4);
+      padding: 48px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+    }
+
+    .footer-link {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--dark-4);
+      padding-bottom: 2px;
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    .footer-link:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeSlideRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+      .hero-divider { margin: 24px auto; }
+      .hero-image-wrap { order: -1; }
+      .film-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 18px; }
+      footer { flex-direction: column; gap: 20px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">NANI</span>
+    <ul class="nav-links">
+      <li><a href="#bio">About</a></li>
+      <li><a href="#telugu">Telugu</a></li>
+      <li><a href="#tamil">Tamil</a></li>
+      <li><a href="#producer">Producer</a></li>
+      <li><a href="#upcoming">Upcoming</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Telugu Cinema's Natural Star</p>
+      <h1 class="hero-name">Na<em>ni</em></h1>
+      <p class="hero-subtitle">Actor · Producer · Television Host</p>
+      <div class="hero-divider"></div>
+      <p class="hero-since">Debut 2008 &nbsp;·&nbsp; 30+ Films &nbsp;·&nbsp; Nandi Award Winner</p>
+    </div>
+    <div class="hero-image-wrap">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Nani_at_an_interview_for_film_companion_%28cropped%29.png/500px-Nani_at_an_interview_for_film_companion_%28cropped%29.png" alt="Nani">
+    </div>
+  </div>
+</header>
+
+<!-- BIO -->
+<section class="bio-section" id="bio">
+  <p class="section-label">Biography</p>
+  <p class="bio-text">
+    Nani is an Indian actor, film producer and television presenter who works predominantly in Telugu films — considered one of the highest-paid and leading actors of Telugu Cinema. He made his debut with Mohana Krishna Indraganti's 2008 comedy <em>Ashta Chamma</em>, an adaptation of Oscar Wilde's <em>The Importance of Being Earnest</em>. After its commercial success, Nani collaborated with luminaries like S. S. Rajamouli and Gautham Vasudev Menon, earning the Nandi Award for Best Actor for <em>Yeto Vellipoyindhi Manasu</em> and an award at the 2013 Toronto After Dark Film Festival for <em>Eega</em>. His blockbuster run with <em>Bhale Bhale Magadivoy</em>, <em>Jersey</em>, and beyond cemented his place as a generational force in Indian cinema.
+  </p>
+</section>
+
+<!-- FILMOGRAPHY -->
+<section class="filmography" id="telugu">
+  <div class="filmo-header">
+    <h1>Nani's <span>Filmography</span></h1>
+  </div>
+
+  <h2 class="category-title">Actor</h2>
+  <p class="subcategory-title">Telugu Films</p>
+  <div class="film-grid" id="telugu-grid">
+
+    <div class="film-card" style="animation-delay:0.05s">
+      <a href="https://www.youtube.com/watch?v=dzJCya42vpM" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/Ashta_Chamma_Poster.JPG/388px-Ashta_Chamma_Poster.JPG" alt="Ashta Chamma">
+        <div class="film-info"><p class="film-number">01</p><p class="film-title">Ashta Chamma</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.10s">
+      <a href="https://youtu.be/M-OwQPlmGXs" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/3/3e/Ride_Poster.jpg" alt="Ride">
+        <div class="film-info"><p class="film-number">02</p><p class="film-title">Ride</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.15s">
+      <a href="https://www.youtube.com/watch?v=VxROPLtkh6s" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://c.saavncdn.com/215/Snehituda-2009-500x500.jpg" alt="Snehithuda">
+        <div class="film-info"><p class="film-number">03</p><p class="film-title">Snehithuda</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.20s">
+      <a href="https://youtu.be/hu8NDQ8R3zU" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/0/08/Bheemili_Kabaddi_Jattu_poster.jpg" alt="Bheemili Kabaddi Jattu">
+        <div class="film-info"><p class="film-number">04</p><p class="film-title">Bheemili Kabaddi Jattu</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.25s">
+      <a href="https://www.youtube.com/watch?v=3B0mUHR7SsU" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/0/00/Ala_Modalaindi_poster.jpg" alt="Ala Modalaindi">
+        <div class="film-info"><p class="film-number">05</p><p class="film-title">Ala Modalaindi</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.30s">
+      <a href="https://youtu.be/pCDwEFfWgbQ" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/f/fa/Pilla_Zamindar.jpg" alt="Pilla Zamindar">
+        <div class="film-info"><p class="film-number">06</p><p class="film-title">Pilla Zamindar</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.35s">
+      <a href="https://youtu.be/DqsbvV83LRI" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/3/30/Eega_poster.jpg" alt="Eega">
+        <div class="film-info"><p class="film-number">07</p><p class="film-title">Eega</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.40s">
+      <a href="https://youtu.be/TfZ7_JgpwGk" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/e/ee/Yeto_Vellipoyindhi_Manasu.jpg" alt="Yeto Vellipoyindi Manasu">
+        <div class="film-info"><p class="film-number">08</p><p class="film-title">Yeto Vellipoyindi Manasu</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.45s">
+      <a href="https://youtu.be/rdiNEgtOnGo" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/f/f3/Paisa_poster.jpg" alt="Paisa">
+        <div class="film-info"><p class="film-number">09</p><p class="film-title">Paisa</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.50s">
+      <a href="https://youtu.be/Py5pVg3zFaI" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/4/47/Janda_Pai_Kapiraju_poster.jpg" alt="Janda Pai Kapiraju">
+        <div class="film-info"><p class="film-number">10</p><p class="film-title">Janda Pai Kapiraju</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.55s">
+      <a href="https://youtu.be/mFtH17eFmJQ" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/e/e6/Yevade_Subramanyam_first_poster.jpg" alt="Yevade Subramanyam">
+        <div class="film-info"><p class="film-number">11</p><p class="film-title">Yevade Subramanyam</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.60s">
+      <a href="https://youtu.be/NVwLg3Kwavo" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/5/5e/Bhale_Bhale_Magadivoy_poster.jpg" alt="Bhale Bhale Magadivoy">
+        <div class="film-info"><p class="film-number">12</p><p class="film-title">Bhale Bhale Magadivoy</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.65s">
+      <a href="https://www.sunnxt.com/telugu-movie-krishna-gaadi-veera-prema-gaadha-2016/detail/7755" target="_blank">
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/5/53/Krishna_Gadi_Veera_Prema_Gaadha_Telugu_poster.jpg" alt="Krishna Gadi Veera Prema Gaadha">
+        <div class="film-info"><p class="film-number">13</p><p class="film-title">Krishna Gadi Veera Prema Gaadha</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.70s">
+      <a href="https://youtu.be/Fk7RvAZNimM" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/Gentleman_%282016_film%29_poster.jpg/425px-Gentleman_%282016_film%29_poster.jpg" alt="Gentleman">
+        <div class="film-info"><p class="film-number">14</p><p class="film-title">Gentleman</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.75s">
+      <a href="https://youtu.be/pnGSuCYStW8" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/1/16/Majnu_%282016_film%29_poster.jpg" alt="Majnu">
+        <div class="film-info"><p class="film-number">15</p><p class="film-title">Majnu</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.80s">
+      <a href="https://youtu.be/sqW95LOMrBU" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/c/c3/Nenulocal1.jpg" alt="Nenu Local">
+        <div class="film-info"><p class="film-number">16</p><p class="film-title">Nenu Local</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.85s">
+      <a href="https://youtu.be/34ItxVULkqI" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/5/52/Ninnu_Kori_poster.jpg" alt="Ninnu Kori">
+        <div class="film-info"><p class="film-number">17</p><p class="film-title">Ninnu Kori</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.90s">
+      <a href="https://youtu.be/RKo4GMc4f6w" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/0/0f/Middle_Class_Abbayi_poster.jpg" alt="Middle Class Abbayi">
+        <div class="film-info"><p class="film-number">18</p><p class="film-title">Middle Class Abbayi</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:0.95s">
+      <a href="https://youtu.be/782qZuFNtLY" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/e/ea/Krishnarjuna_Yudham_poster.jpg" alt="Krishnarjuna Yudham">
+        <div class="film-info"><p class="film-number">19</p><p class="film-title">Krishnarjuna Yudham</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:1.00s">
+      <a href="https://youtu.be/E8llpsczra8" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/5/59/Devadas_%282018%29_poster.jpg" alt="Devadas">
+        <div class="film-info"><p class="film-number">20</p><p class="film-title">Devadas</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:1.05s">
+      <a href="https://youtu.be/kzv4lqpKi6k" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/1/10/Jersey_2019_poster.jpg" alt="Jersey">
+        <div class="film-info"><p class="film-number">21</p><p class="film-title">Jersey</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:1.10s">
+      <a href="https://youtu.be/Ua9uALWSFmU" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/7/75/Gang_Leader_2019_film_poster.jpg" alt="Gang Leader">
+        <div class="film-info"><p class="film-number">22</p><p class="film-title">Gang Leader</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:1.15s">
+      <a href="https://youtu.be/UqoHc1YJmZE" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/b/b5/V_%28film%29.jpg" alt="V">
+        <div class="film-info"><p class="film-number">23</p><p class="film-title">V</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:1.20s">
+      <a href="https://youtu.be/E95eaxY583E" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/b/be/Tuck_Jagadish_poster.jpg" alt="Tuck Jagadish">
+        <div class="film-info"><p class="film-number">24</p><p class="film-title">Tuck Jagadish</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:1.25s">
+      <a href="https://youtu.be/2sII3J3nGrY" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/f/f0/Shyam_singa_roy_poster.jpg" alt="Shyam Singha Roy">
+        <div class="film-info"><p class="film-number">25</p><p class="film-title">Shyam Singha Roy</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:1.30s">
+      <a href="#" target="_blank">
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/2/2d/Ante_Sundaraniki_poster.jpeg" alt="Ante Sundaraniki">
+        <div class="film-info"><p class="film-number">26</p><p class="film-title">Ante Sundaraniki</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:1.35s">
+      <a href="https://youtu.be/u_gYJx8YjUI" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/7/7a/Dasara_Film.jpg" alt="Dasara">
+        <div class="film-info"><p class="film-number">27</p><p class="film-title">Dasara</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:1.40s">
+      <a href="https://youtu.be/7uYET_T0NQk" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/d/d7/Hi_Nanna_poster.jpg" alt="Hi Nanna">
+        <div class="film-info"><p class="film-number">28</p><p class="film-title">Hi Nanna</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:1.45s">
+      <a href="#" target="_blank">
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/d/d9/Saripodhaa_Sanivaaram.jpg" alt="Saripodhaa Sanivaaram">
+        <div class="film-info"><p class="film-number">29</p><p class="film-title">Saripodhaa Sanivaaram</p></div>
+      </a>
+    </div>
+
+    <div class="film-card" style="animation-delay:1.50s">
+      <a href="#" target="_blank">
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/0/09/HIT_-_The_Third_Case.jpg" alt="HIT: The Third Case">
+        <div class="film-info"><p class="film-number">30</p><p class="film-title">HIT: The Third Case</p></div>
+      </a>
+    </div>
+
+  </div><!-- /telugu-grid -->
+
+  <!-- TAMIL -->
+  <div id="tamil">
+    <p class="subcategory-title" style="margin-top:80px">Tamil Films</p>
+    <div class="film-grid">
+
+      <div class="film-card">
+        <a href="https://youtu.be/dwUjQU8b0mE" target="_blank">
+          <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+          <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/e/e1/Veppam_poster.jpg" alt="Veppam">
+          <div class="film-info"><p class="film-number">01</p><p class="film-title">Veppam</p></div>
+        </a>
+      </div>
+
+      <div class="film-card">
+        <a href="https://youtu.be/DqsbvV83LRI" target="_blank">
+          <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+          <img class="film-poster" src="https://images.filmibeat.com/webp/280x383/img/popcorn/movie_posters/naan-ee-11258.jpg" alt="Naan Ee">
+          <div class="film-info"><p class="film-number">02</p><p class="film-title">Naan Ee</p></div>
+        </a>
+      </div>
+
+      <div class="film-card">
+        <a href="#" target="_blank">
+          <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/f/fc/Aaha_Kalyanam.jpg" alt="Aaha Kalyanam">
+          <div class="film-info"><p class="film-number">03</p><p class="film-title">Aaha Kalyanam</p></div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SPECIAL APPEARANCES -->
+  <p class="subcategory-title" style="margin-top:80px">Special Appearances</p>
+  <div class="film-grid">
+
+    <div class="film-card">
+      <a href="https://youtu.be/6xa6W0SD9Vg" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/c/c4/Neethaane_En_Ponvasantham_poster.jpg" alt="Neethaane En Ponvasantham">
+        <div class="film-info"><p class="film-number">01</p><p class="film-title">Neethaane En Ponvasantham</p></div>
+      </a>
+    </div>
+
+    <div class="film-card">
+      <a href="https://youtu.be/SVWxuL7BSiU" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/1/19/Nimirndhu_Nil.jpg" alt="Nimirndhu Nil">
+        <div class="film-info"><p class="film-number">02</p><p class="film-title">Nimirndhu Nil</p></div>
+      </a>
+    </div>
+
+    <div class="film-card">
+      <a href="https://youtu.be/qP8TK4WaHFc" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/b/ba/Manchu_Lakshmi_Dongaata_Poster.jpg" alt="Dongaata">
+        <div class="film-info"><p class="film-number">03</p><p class="film-title">Dongaata</p></div>
+      </a>
+    </div>
+
+    <div class="film-card">
+      <a href="https://www.zee5.com/movies/details/jyo-achutananda/0-0-1z51301" target="_blank">
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/6/61/Jyo_Achyutananda.jpg" alt="Jyo Achyutananda">
+        <div class="film-info"><p class="film-number">04</p><p class="film-title">Jyo Achyutananda</p></div>
+      </a>
+    </div>
+
+    <div class="film-card">
+      <a href="https://youtu.be/f4RejeIEqGA" target="_blank">
+        <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/8/8d/Neevevaro.jpg" alt="Neevevaro">
+        <div class="film-info"><p class="film-number">05</p><p class="film-title">Neevevaro</p></div>
+      </a>
+    </div>
+
+    <div class="film-card">
+      <a href="https://www.mxplayer.in/movie/watch-hit-the-second-case-movie-online-988c18a567356c3d28d68b03558250ff" target="_blank">
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/e/ef/HIT_2_poster.jpg" alt="HIT: The Second Case">
+        <div class="film-info"><p class="film-number">06</p><p class="film-title">HIT: The Second Case</p></div>
+      </a>
+    </div>
+
+    <div class="film-card">
+      <a href="https://www.primevideo.com/detail/Kumari-Srimathi/0GQHG21OFLSHUZDYPB0PSL8UYE" target="_blank">
+        <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/d/d3/Kumari_Srimathi_title_card.jpg" alt="Kumari Srimati">
+        <div class="film-info"><p class="film-number">07</p><p class="film-title">Kumari Srimati</p></div>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- UPCOMING -->
+  <div id="upcoming">
+    <h2 class="category-title" style="margin-top:80px">Upcoming Projects</h2>
+    <div class="film-grid" style="margin-top:32px">
+
+      <div class="film-card" style="outline: 1px solid var(--gold);">
+        <a href="https://youtu.be/NkZFnpDhdCk" target="_blank">
+          <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+          <img class="film-poster" src="https://static.toiimg.com/thumb/msid-127461168,imgsize-1547881,width-400,resizemode-4/127461168.jpg" alt="The Paradise">
+          <div class="film-info"><p class="film-number">01</p><p class="film-title">The Paradise</p></div>
+        </a>
+      </div>
+
+      <div class="film-card" style="outline: 1px solid var(--gold);">
+        <a href="https://youtu.be/kNhrtCJ-4Qk" target="_blank">
+          <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+          <img class="film-poster" src="https://www.cinejosh.com/newsimg/newsmainimg/fast-track-production-for-nani-sujeeth-film_b_0110250728.jpg" alt="Bloody Romeo">
+          <div class="film-info"><p class="film-number">02</p><p class="film-title">Bloody Romeo</p></div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PRODUCER -->
+  <div id="producer">
+    <h2 class="category-title" style="margin-top:80px">As Producer</h2>
+    <div class="film-grid" style="margin-top:32px">
+
+      <div class="film-card">
+        <a href="https://www.airtelxstream.in/movies/d-for-dopidi/SUNNXT_MOVIE_7605" target="_blank">
+          <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e8/D_for_Dopidi.jpg/425px-D_for_Dopidi.jpg" alt="D for Dopidi">
+          <div class="film-info"><p class="film-number">01</p><p class="film-title">D for Dopidi</p></div>
+        </a>
+      </div>
+
+      <div class="film-card">
+        <a href="https://youtu.be/JzWWGMAiyRE?si=mBCpL1k8VpofEEJI" target="_blank">
+          <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/8/81/Awe_film_poster.jpg" alt="Awe">
+          <div class="film-info"><p class="film-number">02</p><p class="film-title">Awe!</p></div>
+        </a>
+      </div>
+
+      <div class="film-card">
+        <a href="https://youtu.be/hTb1PEyAqbs" target="_blank">
+          <div class="play-badge"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+          <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/1/12/HIT_The_First_Case.jpg" alt="HIT: The First Case">
+          <div class="film-info"><p class="film-number">03</p><p class="film-title">HIT: The First Case</p></div>
+        </a>
+      </div>
+
+      <div class="film-card">
+        <a href="https://www.sonyliv.com/shows/meet-cute-1700001072?utm_source=Google&utm_medium=WatchNow&utm_campaign=1700001072" target="_blank">
+          <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/d/da/Meet_Cute_Poster.jpg" alt="Meet Cute">
+          <div class="film-info"><p class="film-number">04</p><p class="film-title">Meet Cute</p></div>
+        </a>
+      </div>
+
+      <div class="film-card">
+        <a href="https://www.mxplayer.in/movie/watch-hit-the-second-case-movie-online-988c18a567356c3d28d68b03558250ff" target="_blank">
+          <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/e/ef/HIT_2_poster.jpg" alt="HIT: The Second Case">
+          <div class="film-info"><p class="film-number">05</p><p class="film-title">HIT: The Second Case</p></div>
+        </a>
+      </div>
+
+      <div class="film-card">
+        <a href="#" target="_blank">
+          <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/f/ff/Court_-_State_Vs_A_Nobody.jpg" alt="Court - State Vs A Nobody">
+          <div class="film-info"><p class="film-number">06</p><p class="film-title">Court — State Vs A Nobody</p></div>
+        </a>
+      </div>
+
+      <div class="film-card">
+        <a href="#" target="_blank">
+          <img class="film-poster" src="https://upload.wikimedia.org/wikipedia/en/0/09/HIT_-_The_Third_Case.jpg" alt="HIT: The Third Case">
+          <div class="film-info"><p class="film-number">07</p><p class="film-title">HIT: The Third Case</p></div>
+        </a>
+      </div>
+
+      <div class="film-card">
+        <a href="#" target="_blank">
+          <img class="film-poster" src="https://www.greatandhra.com/newphotos10/meghastarrr1733238632.jpeg" alt="Chiranjeevi-Odela Film">
+          <div class="film-info"><p class="film-number">08</p><p class="film-title">Chiranjeevi — Odela</p></div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">NANI</span>
+  <p style="font-size:0.72rem;color:var(--text-muted);letter-spacing:0.15em;">© 2025 Career Profile</p>
+  <a class="footer-link" href="https://en.wikipedia.org/wiki/Nani_(actor)" target="_blank">Wikipedia ↗</a>
+</footer>
+
+<script>
+  // Intersection Observer for fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.film-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'opacity 0.55s ease, transform 0.55s ease, box-shadow 0.4s, outline 0.4s';
+    observer.observe(card);
+  });
+</script>
+
+</body>
+</html>
